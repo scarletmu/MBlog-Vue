@@ -1,43 +1,25 @@
 <template>
-  <md-layout md-align="center" md-gutter="24" md-flex-xsmall md-flex-small md-flex>
-    <md-layout md-flex-medium="33">
-      <md-card md-with-hover class="articleCard">
-        <md-card-media class="titleImg">
-          <img src="https://vuematerial.github.io/assets/card-image-1.jpg"  class="titleImg">
-        </md-card-media>
+  <md-layout md-align="center" md-gutter="40" md-flex-xsmall md-flex-small md-flex>
+    <md-card md-with-hover class="articleCard" v-for="article in articleList">
+      <md-card-media class="titleImg">
+        <img :src="article.Thumbnail" class="titleImg">
+      </md-card-media>
 
-        <md-card-header>
-          <div class="md-title">Title goes here</div>
-          <div class="md-subhead">Subtitle here</div>
-        </md-card-header>
+      <md-card-header>
+        <div class="md-title">{{article.Title}}</div>
+      </md-card-header>
 
-        <md-card-content>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non, voluptas eius illo quas, saepe voluptate pariatur in deleniti minus sint. Excepturi.
-        </md-card-content>
-      </md-card>
-      
-    </md-layout>
-    <md-layout md-flex-medium="33">
-      <md-card md-with-hover class="articleCard">
-        <md-card-media class="titleImg">
-          <img src="https://vuematerial.github.io/assets/card-image-1.jpg"  class="titleImg">
-        </md-card-media>
+      <md-card-content>
+        {{article.Summary}}
+      </md-card-content>
 
-        <md-card-header>
-          <div class="md-title">Title goes here</div>
-          <div class="md-subhead">Subtitle here</div>
-        </md-card-header>
-
-        <md-card-content>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non, voluptas eius illo quas, saepe voluptate pariatur in deleniti minus sint. Excepturi.
-        </md-card-content>
-      </md-card>
-    </md-layout>
+    </md-card>
   </md-layout>
 </template>
 
 <script>
 export default {
+  props: [ 'articleList' ],
   data () {
     return {
     }

@@ -1,7 +1,7 @@
 <template>
   <md-layout md-gutter="8">
-    <TypeList></TypeList>
-    <ArticleList></ArticleList>
+    <TypeList :typeList="typeList"></TypeList>
+    <ArticleList :articleList="articleList"></ArticleList>
   </md-layout>
 </template>
 
@@ -13,7 +13,31 @@ export default {
   components: { TypeList, ArticleList },
   data () {
     return {
+      typeList: [],
+      articleList: []
     }
+  },
+  methods: {
+    async getTypeList(){
+      let res = await this.$fetch.get('/category/getList', {})
+      if(res.status !== 200){
+        console.error('Get type list failed');
+      }
+      let json = await res.json(); 
+      this.typeList = json;
+    },
+    async getArticleList(){
+      let res = await this.$fetch.get('/topic/getList', { page: 1 });
+      if(res.status !== 200){
+        console.error('Get article list failed'); 
+      }
+      let json = await res.json();
+      this.articleList = json;
+    }
+  },
+  mounted(){
+    this.getTypeList();
+    this.getArticleList();
   }
 }
 </script>

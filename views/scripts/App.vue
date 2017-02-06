@@ -29,6 +29,6 @@ export default {
 
 <style>
 #body {
-  margin: 10px 10px;
+  margin: 10px 30px;
 }
 </style>

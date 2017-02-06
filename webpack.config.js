@@ -5,7 +5,6 @@ module.exports = {
   context: path.resolve(__dirname, './views/'),
   entry: [
     'babel-polyfill',
-    'material-design-icons',
     './scripts/main.js'
   ],
   output: {

@@ -24,6 +24,7 @@
     "serve-favicon": "~2.3.0",
     "socket.io": "^1.5.0",
     "vue": "^2.1.10",
+    "vue-fetch": "^0.3.1",
     "vue-material": "^0.6.3",
     "vue-router": "^2.0.0",
     "vue-socket.io": "^1.0.2",
