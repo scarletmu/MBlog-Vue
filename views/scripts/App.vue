@@ -1,11 +1,8 @@
 <template>
   <div id="app">
     <HeadBar :toggleSlider="toggleSlider"></HeadBar>
-    <md-sidenav class="md-left" ref="slider">
-      <md-toolbar class="md-large">
-        <Slider></Slider>        
-      </md-toolbar>
-    </md-sidenav>
+    <Slider></Slider>
+    
   </div>
 </template>
 
@@ -22,7 +19,7 @@ export default {
   }, 
   methods: {
     toggleSlider(){
-      this.$refs.slider.toggle();
+      this.$children[1].$refs.slider.toggle();
     }
   }
 }  
