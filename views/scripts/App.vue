@@ -1,16 +1,28 @@
 <template>
   <div id="app">
-    <Header></Header>
+    <HeadBar :toggleSlider="toggleSlider"></HeadBar>
+    <md-sidenav class="md-left" ref="slider">
+      <md-toolbar class="md-large">
+        <Slider></Slider>        
+      </md-toolbar>
+    </md-sidenav>
   </div>
 </template>
 
 <script>
-import Header from './component/Header.vue';
+import HeadBar from './component/Header.vue';
+import Slider from './component/Slider.vue';
 
 export default {
-  components:{ Header },
+  components:{ HeadBar, Slider },
   data () {
     return {
+      isOpen: false
+    }
+  }, 
+  methods: {
+    toggleSlider(){
+      this.$refs.slider.toggle();
     }
   }
 }  

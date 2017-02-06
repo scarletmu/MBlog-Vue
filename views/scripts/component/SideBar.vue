@@ -1,6 +1,6 @@
 <template>
   <md-toolbar class="">
-    <md-button class="md-icon-button" @click="toggle">
+    <md-button class="md-icon-button">
       <md-icon>menu</md-icon>
     </md-button>
 
@@ -16,12 +16,6 @@
 export default {
   data () {
     return {
-    }
-  },
-  props: ['toggleSlider'],
-  methods: {
-    toggle(){
-      this.toggleSlider();
     }
   }
 }
