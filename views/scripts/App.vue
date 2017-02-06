@@ -2,7 +2,9 @@
   <div id="app">
     <HeadBar :toggleSlider="toggleSlider"></HeadBar>
     <Slider></Slider>
-    
+    <div id="body">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -26,4 +28,7 @@ export default {
 </script>
 
 <style>
+#body {
+  margin: 10px 10px;
+}
 </style>
