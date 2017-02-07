@@ -1,6 +1,6 @@
 <template>
-  <md-layout md-align="center" md-gutter="40" md-flex-xsmall md-flex-small md-flex>
-    <md-card md-with-hover class="articleCard" v-for="article in articleList">
+  <md-layout md-align="center" md-gutter="16" md-flex-xsmall md-flex-small md-flex md-column-xsmall>
+    <md-card md-with-hover class="articleCard" @click.native="preview(article._id)" v-for="article in articleList"> 
       <md-card-media class="titleImg">
         <img :src="article.Thumbnail" class="titleImg">
       </md-card-media>
@@ -13,7 +13,31 @@
         {{article.Summary}}
       </md-card-content>
 
+      <md-card-actions>
+        <md-button class="md-icon-button">
+          <md-icon>favorite</md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button">
+          <md-icon>bookmark</md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button">
+          <md-icon>share</md-icon>
+        </md-button>
+      </md-card-actions>
     </md-card>
+
+    <!--Preview Dialog-->
+    <md-dialog ref="dialog1"> 
+      <md-dialog-title>{{articleDetail.Title}}</md-dialog-title>
+      <md-dialog-content v-html="articleDetail.Content"></md-dialog-content>
+      <md-dialog-actions>
+        <md-button class="md-primary" @click="closeDialog()">Cancel</md-button>
+        <md-button class="md-primary" @click="closeDialog()">Ok</md-button>
+      </md-dialog-actions>
+    </md-dialog>
+
   </md-layout>
 </template>
 
@@ -22,7 +46,25 @@ export default {
   props: [ 'articleList' ],
   data () {
     return {
+      articleDetail: {}
     }
+  },
+  methods: {
+    async preview(id){
+      let res = await this.$fetch.get('/topic/getDetail', {topicId: id});
+      if(res.status !== 200){
+        alert('Error');
+        return;
+      }
+      let json = await res.json();
+      let converter = new this.$showdown.Converter();
+      json.Content = converter.makeHtml(json.Content);
+      this.articleDetail = json;
+      this.$refs.dialog1.open();
+    },
+    closeDialog(){
+      this.$refs.dialog1.close(); 
+    },
   }
 }
 </script>
@@ -33,6 +75,6 @@ export default {
   max-height:100%;
 }
 .articleCard {
-  /*max-width: 320px;*/
+  max-width: 320px;
 }
 </style>
