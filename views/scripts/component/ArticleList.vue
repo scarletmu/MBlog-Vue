@@ -1,6 +1,6 @@
 <template>
-  <md-layout md-align="center" md-gutter="16" md-flex-xsmall md-flex-small md-flex md-column-xsmall>
-    <md-card md-with-hover class="articleCard" @click.native="preview(article._id)" v-for="article in articleList"> 
+  <md-layout md-align="center" md-gutter md-flex-xsmall md-flex-small md-flex md-column-xsmall>
+    <md-card md-layout md-with-hover class="articleCard" @click.native="preview(article._id)" v-for="article in articleList"> 
       <md-card-media class="titleImg">
         <img :src="article.Thumbnail" class="titleImg">
       </md-card-media>
@@ -76,5 +76,6 @@ export default {
 }
 .articleCard {
   max-width: 320px;
+  margin: 8px 16px;
 }
 </style>
