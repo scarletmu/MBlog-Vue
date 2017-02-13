@@ -43,6 +43,8 @@ app.use(express.static(path.join(__dirname, 'views/dist/')));
   })
 })();
 
+let user = require('./modules/user');
+user.init();
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

@@ -16,12 +16,12 @@
         <form>
           <md-input-container>
             <label>用户名</label>
-            <md-input></md-input>
+            <md-input v-model="username"></md-input>
           </md-input-container>
 
           <md-input-container md-has-password>
             <label>密码</label>
-            <md-input type="password"></md-input>
+            <md-input v-model="password" type="password"></md-input>
           </md-input-container>
         </form>
       </md-dialog-content>
@@ -37,6 +37,8 @@
 export default {
   data () {
     return {
+      username: '',
+      password: ''
     }
   },
   props: ['toggleSlider'],
@@ -48,7 +50,18 @@ export default {
       this.$refs['adminLogin'].open();
     },
     async login(){
-      this.$
+      let res = await this.$fetch.post('/user/login', {
+        data: {
+          username: this.username,
+          password: this.password
+        }
+      })
+      if(res.status !== 200){
+        console.error('Log failed');
+        //Should alert here
+      }
+      this.$refs['adminLogin'].close();
+      this.$router.push({path: '/admin'});
     } 
   }
 }
