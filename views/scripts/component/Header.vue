@@ -9,6 +9,7 @@
     <md-button class="md-icon-button">
       <md-icon @click.native="loginDialog">settings</md-icon>
     </md-button>
+
     <md-dialog ref="adminLogin">
       <md-dialog-title>登录后台管理</md-dialog-title>
 
