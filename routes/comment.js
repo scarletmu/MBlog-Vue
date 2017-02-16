@@ -1,20 +1,35 @@
-/**
- * Created by scarlet on 16/4/11.
- */
 'use strict';
 const Comment = require('../modules/comment');
-const router = require('express').Router();
+const router = require('koa-router')({prefix: '/comment'});
 
-router.post('/addComment',function(req,res,next){
-  Comment.add(req.body).then((data) => {res.json(data);}).catch((err) => {console.log(err);res.status(400).end();})
+router.post('/addComment', async function(ctx, next){
+  try{
+    let data = await Comment.add(ctx.request.body);
+    ctx.body = data;
+  }catch(err){
+    ctx.status = 500;
+    ctx.body = err;
+  }
 });
 
-router.get('/getListByTopic',function(req,res,next){
-  Comment.getListByTopic(req.query['id']).then((data) => {res.json(data);}).catch((err) => {console.log(err);res.status(400).end();})
+router.get('/getListByTopic',async function(req,res,next){
+  try{
+    let data = await Comment.getListByTopic(ctx.query['id']);
+    ctx.body = data;
+  }catch(err){
+    ctx.status = 500;
+    ctx.body = err;
+  }
 });
 
-router.get('/getList',function(req,res,next){
-  Comment.getList(req.query['page']).then((data) => {res.json(data);}).catch((err) => {console.log(err);res.status(400).end();})
+router.get('/getList', async function(req,res,next){
+  try{
+    let data = await Comment.add(ctx.query['page']);
+    ctx.body = data;
+  }catch(err){
+    ctx.status = 500;
+    ctx.body = err;
+  }
 });
 
 module.exports = router;

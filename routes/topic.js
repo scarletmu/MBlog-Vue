@@ -1,24 +1,55 @@
-/**
- * Created by scarlet on 16/3/27.
- */
 'use strict';
-const router = require('express').Router();
+const router = require('koa-router')({prefix: '/topic'});
+const logger = require('../utils/logger');
 const Topic = require('../modules/topic');
 
-router.get('/getList',function(req,res,next){
-  Topic.getList(req.query['page']).then((data) => (res.json(data))).catch((err)=>{console.log(err);res.status(400).end();});
+router.get('/getList', async function(ctx, next){
+  try{
+    let result = await Topic.getList(ctx.query['page']);
+    ctx.body = result;
+  }catch(err){
+    logger.error('Error in getList');
+    logger.error(err);
+    ctx.status = 500;
+    ctx.body = err;
+  }
 });
 
-router.get('/getTop',function(req,res,next){
-  Topic.getTop().then((data) => {res.json(data)}).catch((err) => {res.status(400).end()});
+router.get('/getTop', async function(ctx, next){
+  try{
+    let data = await Topic.getTop();
+    ctx.body = data;
+  }catch(err){
+    logger.error('Error in getTop');
+    logger.error(err);
+    ctx.status = 500;
+    ctx.body = err;
+  }
 });
 
-router.get('/getDetail',function(req,res,next){
-  Topic.getDetail(req.query['topicId']).then((data) => {res.json(data)}).catch((err) => {console.log(err);res.status(400).end()})
+router.get('/getDetail',async function(ctx, next){
+  try{
+    let data = await Topic.getDetail(ctx.query['topicId']);
+    ctx.body = data;
+  }catch(err){
+    logger.error('Error in getDetail');
+    logger.error(err);
+    ctx.status = 500;
+    ctx.body = err;
+  }
 });
 
-router.get('/getListByCategory',function(req,res,next){
-  Topic.getListByCategory(req.query['id'],req.query['page']).then((data) => {res.json(data)}).catch((err) => {console.log(err);res.status(400).end()})
+router.get('/getListByCategory', async function(ctx,next){
+  try{
+    let data = await Topic.getListByCategory(ctx.query['id'], ctx.query['page']);
+    ctx.body = data;
+  }catch(err){
+    logger.error('Error in getDetail');
+    logger.error(err);
+    ctx.status = 500;
+    ctx.body = err;
+  }
 });
 
-module.exports  = router;
+
+module.exports = router;

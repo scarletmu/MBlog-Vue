@@ -1,36 +1,60 @@
 'use strict';
 const upyun = require('../utils/upyun');
-const router = require('express').Router();
+const router = require('koa-router')({prefix: '/admin'});
 const Topic = require('../modules/topic');
 const Category = require('../modules/category');
 
-router.use(function (req, res, next) {
-  if (req.session.username) {
-    next();
+router.use(async function (ctx, next) {
+  if (ctx.session.username) {
+    await next();
   } else {
-    res.status(403).end();
+    ctx.status = 403;
+    ctx.body = '无权访问';
   }
 });
 
-router.get('/getToken',function(req,res,next){
-  upyun.getToken('/blog/{filemd5}{.suffix}').then((data) => {res.json(data)}).catch((err) => {console.log(err);res.status(400).end()})
+router.get('/getToken', async function(ctx, next){
+  try{
+    let data = await upyun.getToken
+    ctx.body = data;
+  }catch(err){
+    ctx.status = 500; 
+    ctx.body = err;
+  }
 });
 
-router.post('/addTopic',function(req,res,next){
-  let data = req.body;
-  Topic.addTopic(data).then((data) => {console.log(data);res.json(data)}).catch((err) => {console.log(err);res.status(400).end()})
+router.post('/addTopic', async function(ctx, next){
+  try{
+    let body = ctx.request.body;
+    let result = await Topic.addTopic(body);
+    ctx.body = result;
+  }catch(err){
+    ctx.status = 500;
+    ctx.body = err;
+  }
 });
 
-router.post('/editTopic',function(req,res,next){
+router.post('/editTopic', async function(ctx, next){
   let data = req.body;
-  console.log(data);
-  Topic.editTopic(data.id,data.args).then((data) => {console.log(data);res.json(data)}).catch((err) => {console.log(err);res.status(400).end()})
+  try{
+    let body = ctx.request.body;
+    let result = await Topic.editTopic(body.id, body.args);
+    ctx.body = result;
+  }catch(err){
+    ctx.status = 500;
+    ctx.body = err;
+  }
 });
 
-router.post('/addCategory',function(req,res,next){
-  let data = req.body;
-  console.log(data);
-  Category.addCategory(data).then((data) => {console.log(data);res.json(data)}).catch((err) => {console.log(err);res.status(400).end()})
+router.post('/addCategory',async function(ctx, next){
+  try{
+    let body = ctx.request.body;
+    let result = await Category.addCategory(body);
+    ctx.body = result;
+  }catch(err){
+    ctx.status = 500;
+    ctx.body = err;
+  }
 });
 
 module.exports = router;
