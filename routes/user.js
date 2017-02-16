@@ -4,12 +4,13 @@ const User = require('../modules/user');
 const _ = require('lodash');
 
 router.post('/login',async function(ctx, next){
-  let inputData = ctx.body['data'];
+  let inputData = ctx.request.body['data'];
   try{
     let data = await User.login(inputData.username, inputData.password);
     ctx.session = _.assign(ctx.session, data);
     ctx.body = 'success';
   }catch(err){
+    console.log(err);
     ctx.status = 403;
     ctx.body = err;
   }

@@ -5,11 +5,13 @@ const fs = require('fs');
 const path = require('path');
 const Koa = require('koa');
 const session = require('koa-session2').default;
+const bodyParser = require('koa-bodyparser');
 let app = new Koa();
 
 app.use(session({
-  key: 'SESSIONID'
-}))
+  key: 'koa:sess'
+}, app))
+app.use(bodyParser());
 
 //Static file
 app.use(static('views'));
