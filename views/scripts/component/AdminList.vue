@@ -1,7 +1,7 @@
 <template>
   <md-card class="adminList">
     <md-list>
-      <md-list-item>
+      <md-list-item v-for="item in adminContentList">
         <md-avatar>
           <img src="https://placeimg.com/40/40/people/1" alt="People">
         </md-avatar>
