@@ -26,4 +26,7 @@ export default {
 </script>
 
 <style>
+.TypeList {
+  position: fixed
+}
 </style>

@@ -3,10 +3,13 @@ var webpack = require('webpack')
 
 module.exports = {
   context: path.resolve(__dirname, './views/'),
-  entry: [
-    'babel-polyfill',
-    './scripts/main.js'
-  ],
+  entry: {
+    app: [
+      'babel-polyfill',
+      './scripts/main.js'
+    ],
+    vendor: ['vue', 'vue-material']
+  },
   output: {
     path: path.resolve(__dirname, './views/dist/'),
     publicPath: 'dist/',
@@ -40,5 +43,21 @@ module.exports = {
       }
     ]
   },
-  devtool: '#eval-source-map'
+  plugins: [
+    // new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        drop_console: false,
+      }
+    }),
+    // new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js' }),
+  ],
+  devtool: '#cheap-module-source-map'
 }

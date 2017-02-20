@@ -7,9 +7,9 @@
         </md-avatar>
 
         <div class="md-list-text-container">
-          <span>Ali Connors</span>
-          <span>Brunch this weekend?</span>
-          <p>I'll be in your neighborhood doing errands...</p>
+          <span></span>
+          <span>{{item.Title}}</span>
+          <p>{{item.Summary}}</p>
         </div>
 
         <md-button class="md-icon-button md-list-action">
@@ -27,11 +27,13 @@ export default {
   props: [ 'adminContentList' ],
   data () {
     return {
-      articleDetail: {}
     }
   },
-  methods: {
-   
+  method: {
+    async itemSelect(id){
+      //add edit page of item
+
+    }
   }
 }
 </script>
