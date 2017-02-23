@@ -1,5 +1,5 @@
 <template>
-  <md-layout md-align="center" md-gutter md-flex-xsmall md-flex-small md-flex md-column-xsmall>
+  <div class="ArticleList">
     <md-card md-layout md-with-hover class="articleCard" @click.native="preview(article._id)" v-for="article in articleList"> 
       <md-card-media class="titleImg">
         <img :src="article.Thumbnail" class="titleImg">
@@ -37,8 +37,7 @@
         <md-button class="md-primary" @click="closeDialog()">Ok</md-button>
       </md-dialog-actions>
     </md-dialog>
-
-  </md-layout>
+  </div>
 </template>
 
 <script>
@@ -77,5 +76,11 @@ export default {
 .articleCard {
   max-width: 320px;
   margin: 8px 16px;
+}
+.ArticleList {
+  display: flex;
+  flex-wrap:wrap;
+  justify-content: center;
+  align-items: center;
 }
 </style>

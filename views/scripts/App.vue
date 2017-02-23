@@ -3,7 +3,7 @@
     <HeadBar :toggleSlider="toggleSlider"></HeadBar>
     <Slider></Slider>
     <div id="body">
-      <router-view></router-view>
+      <router-view class="viewArea"></router-view>
     </div>
   </div>
 </template>
@@ -29,6 +29,11 @@ export default {
 
 <style>
 #body {
-  margin: 10px 30px;
+  display: flex;
+  justify-content: center; 
+  align-content: center;
+}
+.viewArea {
+  margin-top:5px;
 }
 </style>

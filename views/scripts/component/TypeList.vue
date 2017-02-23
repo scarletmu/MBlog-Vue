@@ -1,13 +1,11 @@
 <template>
-  <md-layout class="TypeList" md-hide-xsmall md-hide-small md-flex="15">
-    <md-card>
-      <md-list>
-        <md-list-item v-for="type in typeList" @click.native="clickItem(type.Name)">
-          <md-icon>{{type.Icon}}</md-icon> <span>{{type.Name}}</span>
-        </md-list-item>
-      </md-list>
-    </md-card>
-  </md-layout>
+  <div class="TypeList">
+    <md-list>
+      <md-list-item v-for="type in typeList" @click.native="clickItem(type.Name)">
+        <md-icon>{{type.Icon}}</md-icon> <span>{{type.Name}}</span>
+      </md-list-item>
+    </md-list>
+  </div>
 </template>
 
 <script>
@@ -26,7 +24,13 @@ export default {
 </script>
 
 <style>
-.TypeList {
-  position: fixed
+@media (max-width: 480px){
+  .TypeList {
+    display:none;
+  }
+}
+.TypeList{
+  position:fixed;
+  left: 5px;
 }
 </style>

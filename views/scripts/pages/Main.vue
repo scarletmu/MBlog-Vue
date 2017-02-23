@@ -1,8 +1,8 @@
 <template>
-  <md-layout md-gutter="8">
+  <div class="MainPage">
     <TypeList :typeList="typeList"></TypeList>
     <ArticleList :articleList="articleList"></ArticleList>
-  </md-layout>
+  </div>
 </template>
 
 <script>
@@ -43,4 +43,7 @@ export default {
 </script>
 
 <style>
+.MainPage {
+  display: flex
+}
 </style>
