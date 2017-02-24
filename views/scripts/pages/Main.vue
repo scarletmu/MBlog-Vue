@@ -44,6 +44,8 @@ export default {
 
 <style>
 .MainPage {
-  display: flex
+  display: flex;
+  justify-content: center;
+  align-items: center
 }
 </style>

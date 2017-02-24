@@ -74,13 +74,20 @@ export default {
   max-height:100%;
 }
 .articleCard {
-  max-width: 320px;
+  max-width: 400px;
   margin: 8px 16px;
 }
+
 .ArticleList {
   display: flex;
   flex-wrap:wrap;
   justify-content: center;
   align-items: center;
+  max-width: 80%;
+}
+@media (max-width: 960px){
+  .articleCard {
+    max-width: 320px
+  }
 }
 </style>

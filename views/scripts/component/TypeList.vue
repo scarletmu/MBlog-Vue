@@ -24,7 +24,12 @@ export default {
 </script>
 
 <style>
-@media (max-width: 480px){
+@media (max-width: 600px){
+  .TypeList {
+    display:none;
+  }
+}
+@media (max-width: 960px){
   .TypeList {
     display:none;
   }
@@ -32,5 +37,6 @@ export default {
 .TypeList{
   position:fixed;
   left: 5px;
+  top: 68px;
 }
 </style>
