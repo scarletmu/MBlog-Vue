@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  props: [ 'adminContentList' ],
+  props: [ 'title', 'adminContentList' ],
   data () {
     return {
     }
@@ -32,7 +32,6 @@ export default {
   method: {
     async itemSelect(id){
       //add edit page of item
-
     }
   }
 }
@@ -40,6 +39,6 @@ export default {
 
 <style>
 .adminList{
-  width: 100%
+  min-width: 60%;
 }
 </style>

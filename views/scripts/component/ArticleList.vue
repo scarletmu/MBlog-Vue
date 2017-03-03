@@ -33,8 +33,8 @@
       <md-dialog-title>{{articleDetail.Title}}</md-dialog-title>
       <md-dialog-content v-html="articleDetail.Content"></md-dialog-content>
       <md-dialog-actions>
-        <md-button class="md-primary" @click="closeDialog()">Cancel</md-button>
-        <md-button class="md-primary" @click="closeDialog()">Ok</md-button>
+        <md-button class="md-primary md-raised" @click="closeDialog()">查看详情</md-button>
+        <md-button class="md-raised" @click="closeDialog()">关闭</md-button>
       </md-dialog-actions>
     </md-dialog>
   </div>
@@ -74,7 +74,7 @@ export default {
   max-height:100%;
 }
 .articleCard {
-  max-width: 400px;
+  max-width: 480px;
   margin: 8px 16px;
 }
 
@@ -85,9 +85,14 @@ export default {
   align-items: center;
   max-width: 80%;
 }
-@media (max-width: 960px){
+@media (min-width: 480px) and (max-width: 960px){
   .articleCard {
-    max-width: 320px
+    max-width: 240px; 
+  }
+}
+@media (max-width: 480px) {
+  .articleCard {
+    max-width: 320px;
   }
 }
 </style>

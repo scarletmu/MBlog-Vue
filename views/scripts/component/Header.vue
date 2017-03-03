@@ -1,5 +1,5 @@
 <template>
-  <md-toolbar class="">
+  <md-toolbar class="HeaderBar">
     <md-button class="md-icon-button" @click="toggle">
       <md-icon>menu</md-icon>
     </md-button>
@@ -69,4 +69,11 @@ export default {
 </script>
 
 <style>
+.HeaderBar {
+  position: fixed !important;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  z-index: 999;
+}
 </style>

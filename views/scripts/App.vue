@@ -29,6 +29,7 @@ export default {
 
 <style>
 #body {
+  margin-top: 68px;
   display: flex;
   justify-content: center; 
   align-content: center;

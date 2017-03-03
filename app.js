@@ -37,5 +37,5 @@ app.use(router.routes());
   })
 })();
 
-
+console.log('Listening at port 4000');
 app.listen(4000);

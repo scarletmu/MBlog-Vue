@@ -1,8 +1,9 @@
 <template>
-  <md-layout md-gutter="16" md-column class="adminMain">
+  <div class="adminMain">
+    <TypeList :typeList="adminTypeList"></TypeList>
     <AdminList :title="title"
-              :adminList="adminContentList"></AdminList>
-  </md-layout>
+              :adminContentList="adminContentList"></AdminList>
+  </div>
   
   <!--Noty-->
 </template>
@@ -37,8 +38,8 @@ export default {
         console.error('getContentList Failed');
       }
       let json = await res.json();
-      console.log(json.length);
       this.adminContentList = json;
+      console.log(json);
     }
   },
   mounted(){
@@ -48,4 +49,9 @@ export default {
 </script>
 
 <style>
+.adminMain {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
 </style>

@@ -22,6 +22,7 @@ export default {
       let res = await this.$fetch.get('/category/getList', {})
       if(res.status !== 200){
         console.error('Get type list failed');
+        return;
       }
       let json = await res.json(); 
       this.typeList = json;
@@ -30,6 +31,7 @@ export default {
       let res = await this.$fetch.get('/topic/getList', { page: 1 });
       if(res.status !== 200){
         console.error('Get article list failed'); 
+        return;
       }
       let json = await res.json();
       this.articleList = json;
