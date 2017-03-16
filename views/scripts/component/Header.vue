@@ -74,6 +74,6 @@ export default {
   top: 0;
   width: 100%;
   overflow: hidden;
-  z-index: 999;
+  z-index: 99;
 }
 </style>

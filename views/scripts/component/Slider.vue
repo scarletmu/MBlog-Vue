@@ -33,5 +33,12 @@ export default {
   }
 }
 </script>
+
 <style>
+.md-sidenav-content {
+  position: fixed !important;
+}
+.md-sidenav-backdrop {
+  position: fixed !important;
+}
 </style>
