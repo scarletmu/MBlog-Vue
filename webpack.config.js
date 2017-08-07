@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   context: path.resolve(__dirname, './views/'),
@@ -8,7 +9,7 @@ module.exports = {
       'babel-polyfill',
       './scripts/main.js'
     ],
-    vendor: ['vue', 'vue-material']
+    vendor: ['vue', 'vue-material', 'vue-router']
   },
   output: {
     path: path.resolve(__dirname, './views/dist/'),
@@ -28,7 +29,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
@@ -44,12 +48,12 @@ module.exports = {
     ]
   },
   plugins: [
-    // new webpack.NoEmitOnErrorsPlugin(),
-    // new webpack.DefinePlugin({
-    //   'process.env': {
-    //     'NODE_ENV': JSON.stringify('production')
-    //   }
-    // }),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
@@ -58,6 +62,7 @@ module.exports = {
     }),
     // new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js' }),
+    new ExtractTextPlugin("./style.css")
   ],
   devtool: '#cheap-module-source-map'
 }
