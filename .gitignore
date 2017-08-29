@@ -79,3 +79,4 @@ node_modules
 app/bower_components
 config.js
 views/dist/
+stats.json

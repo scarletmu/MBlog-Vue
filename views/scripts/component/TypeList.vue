@@ -1,7 +1,7 @@
 <template>
   <div class="TypeList">
     <md-list>
-      <md-list-item v-for="type in typeList" @click.native="clickItem(type.Name)">
+      <md-list-item v-for="(type,index) in typeList" :key="index" @click.native="clickItem(type.Name)">
         <md-icon>{{type.Icon}}</md-icon> <span>{{type.Name}}</span>
       </md-list-item>
     </md-list>
@@ -23,7 +23,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @media (max-width: 600px){
   .TypeList {
     display:none;

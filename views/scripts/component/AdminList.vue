@@ -37,8 +37,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .adminList{
-  min-width: 60%;
+  width: 100%;
 }
 </style>

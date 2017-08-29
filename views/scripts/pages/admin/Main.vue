@@ -1,6 +1,6 @@
 <template>
   <div class="adminMain">
-    <TypeList :typeList="adminTypeList"></TypeList>
+    <TypeList :typeList="adminTypeList" :getContentList="getContentList"></TypeList>
     <AdminList :title="title"
               :adminContentList="adminContentList"></AdminList>
   </div>
@@ -48,10 +48,12 @@ export default {
  }
 </script>
 
-<style>
+<style scoped>
 .adminMain {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  min-width: 70%;
+  padding-left: 60px;
 }
 </style>
