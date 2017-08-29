@@ -17,9 +17,9 @@ export default {
   data () {
     return {
       adminTypeList: [
-        {Icon: 'article', Name: '文章管理'},
+        {Icon: 'insert_drive_file', Name: '文章管理'},
         {Icon: 'comment', Name: '评论管理'},
-        {Icon: 'type', Name: '分类管理'}
+        {Icon: 'format_line_spacing', Name: '分类管理'}
       ],
       adminContentList: [],
       title: '后台管理'

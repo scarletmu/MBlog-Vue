@@ -1,6 +1,3 @@
-/**
- * Created by scarlet on 16/3/27.
- */
 'use strict';
 const Category = require('./db/mongodb').CategoryModel;
 
