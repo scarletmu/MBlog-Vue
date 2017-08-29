@@ -1,8 +1,7 @@
 <template>
   <div class="adminMain">
     <TypeList :typeList="adminTypeList" :getContentList="getContentList"></TypeList>
-    <AdminList :title="title"
-              :adminContentList="adminContentList"></AdminList>
+    <AdminList :title="title" :adminContentList="adminContentList"></AdminList>
   </div>
   
   <!--Noty-->
@@ -28,6 +27,7 @@ export default {
   methods: {
     async getContentList(name){
       let url = '';
+      this.title = name;
       switch(name){
         case '文章管理': url = '/topic/getList';break;
         case '评论管理': url = '/comment/getList';break;
@@ -36,10 +36,10 @@ export default {
       let res = await this.$fetch.get(url);
       if(res.status !== 200){
         console.error('getContentList Failed');
+        return;
       }
       let json = await res.json();
       this.adminContentList = json;
-      console.log(json);
     }
   },
   mounted(){

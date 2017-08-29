@@ -60,6 +60,9 @@ export default {
       if(res.status !== 200){
         console.error('Log failed');
         //Should alert here
+        let err = await res.text()
+        alert(err);
+        return;
       }
       this.$refs['adminLogin'].close();
       this.$router.push({path: '/admin'});

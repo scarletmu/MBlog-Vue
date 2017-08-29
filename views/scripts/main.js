@@ -3,6 +3,7 @@ import App from './App.vue'
 //Material
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
+import '../styles/loader.css'
 //Plugin
 import VueRouter from 'vue-router';
 import VueFetch from 'vue-fetch';

@@ -1,7 +1,10 @@
 <template>
   <md-card class="adminList">
+    <md-card-header>
+      <div class="md-title">{{title}}</div>
+    </md-card-header>
     <md-list>
-      <md-list-item v-for="item in adminContentList">
+      <md-list-item v-for="(item, index) in adminContentList" :key="index">
         <md-avatar>
           <img src="https://placeimg.com/40/40/people/1" alt="People">
         </md-avatar>

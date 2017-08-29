@@ -1,6 +1,9 @@
 <template>
   <div class="ArticleList">
-    <md-card md-layout md-with-hover class="articleCard" @click.native="preview(article._id)" v-for="article in articleList"> 
+    <md-card md-layout md-with-hover class="articleCard" 
+     @click.native="preview(article._id)" 
+     v-for="(article, index) in articleList"
+     :key="index"> 
       <md-card-media class="titleImg">
         <img :src="article.Thumbnail" class="titleImg">
       </md-card-media>

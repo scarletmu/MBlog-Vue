@@ -23,13 +23,17 @@ export default {
     toggleSlider(){
       this.$children[1].$refs.slider.toggle();
     }
+  },
+  mounted(){
+    document.getElementById('loader').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
   }
 }  
 </script>
 
 <style>
 #body {
-  margin-top: 68px;
+  padding-top: 68px;
   display: flex;
   justify-content: center; 
   align-content: center;

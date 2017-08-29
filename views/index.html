@@ -5,14 +5,17 @@
     <title>MBlog</title>
     <meta name="viewport" content="width=device-width">
     <!-- Use Bootstrap CDN -->
+    <link href="./dist/style.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.css"
       rel="stylesheet">
-    <link href="./dist/style.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/simplemde/1.11.2/simplemde.min.js" async></script>
     <link href="https://cdn.bootcss.com/simplemde/1.11.2/simplemde.min.css" rel="stylesheet" async>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app" style="display:none"></div>
+    <div id="loader">
+        <div class="lds-spinner" style="width:100%;height:100%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
     <script src="./dist/vendor.bundle.js"></script>
     <script src="./dist/build.js"></script>
 </body>
