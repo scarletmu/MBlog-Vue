@@ -37,5 +37,8 @@ app.use(router.routes());
   })
 })();
 
+const userModule = require('./modules/user');
+userModule.init();
+
 console.log('Listening at port 4000');
 app.listen(4000);

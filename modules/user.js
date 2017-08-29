@@ -28,8 +28,7 @@ exports.init = function(){
       console.log('Aready have user');
       return;
     }
-    let pwd = Config.defaultAdmin.password || 'admin',
-     md5Pwd = md5(pwd);
+    let pwd = Config.defaultAdmin.password || 'admin', md5Pwd = md5(pwd);
     yield User.create({
       username: Config.defaultAdmin.username || 'admin',
       password: md5Pwd  

@@ -18,13 +18,16 @@ Vue.prototype.$showdown = showdown;
 
 //Page
 import Main from './pages/Main.vue'
+
+import AdminAdd from './pages/admin/Add.vue'
 import AdminMain from './pages/admin/Main.vue'
 
 //Router
 const router = new VueRouter({
   routes: [
     { path: '/', component: Main },
-    { path: '/admin', component: AdminMain}
+    { path: '/admin', component: AdminMain},
+    { path: '/add', component: AdminAdd},
   ]
 })
 
