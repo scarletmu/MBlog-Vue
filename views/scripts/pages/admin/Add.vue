@@ -21,14 +21,15 @@ export default {
         Summary: undefined,
         Category: undefined,
         Thumnail: undefined
-      }
+      },
+      initialValue: null
     }
   },
   methods:{
 
   },
   mounted(){
-    var simplemde = new SimpleMDE({ 
+    let simplemde = new SimpleMDE({ 
       element: document.getElementById("editArea"),
       spellChecker: false 
     });

@@ -6,15 +6,19 @@ import 'vue-material/dist/vue-material.css'
 import '../styles/loader.css'
 //Plugin
 import VueRouter from 'vue-router';
-import VueFetch from 'vue-fetch';
 import showdown from 'showdown';
+import axios from 'axios';
+import api from './util/api';
+import store from './store';
+
 
 //Usage
 Vue.use(VueRouter);
 Vue.use(VueMaterial);
-Vue.use(VueFetch);
 //mixin
 Vue.prototype.$showdown = showdown;
+Vue.prototype.$http = axios;
+Vue.prototype.$api = api;
 
 //Page
 import Main from './pages/Main.vue'
@@ -26,13 +30,14 @@ import AdminMain from './pages/admin/Main.vue'
 const router = new VueRouter({
   routes: [
     { path: '/', component: Main },
-    { path: '/admin', component: AdminMain},
-    { path: '/add', component: AdminAdd},
+    { path: '/admin', component: AdminMain },
+    { path: '/admin/add', component: AdminAdd}
   ]
 })
 
 new Vue({
  el: '#app',
  router,
+ store,
  render: h => h(App)
 })

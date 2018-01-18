@@ -12,7 +12,7 @@ router.post('/addComment', async function(ctx, next){
   }
 });
 
-router.get('/getListByTopic',async function(req,res,next){
+router.get('/getListByTopic',async function(ctx,next){
   try{
     let data = await Comment.getListByTopic(ctx.query['id']);
     ctx.body = data;
@@ -22,11 +22,12 @@ router.get('/getListByTopic',async function(req,res,next){
   }
 });
 
-router.get('/getList', async function(req,res,next){
+router.get('/getList', async function(ctx,next){
   try{
-    let data = await Comment.add(ctx.query['page']);
+    let data = await Comment.getList(ctx.query['page']);
     ctx.body = data;
   }catch(err){
+    console.error(err);
     ctx.status = 500;
     ctx.body = err;
   }

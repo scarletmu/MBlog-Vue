@@ -2,7 +2,7 @@
   <md-card class="adminList">
     <md-card-header>
       <div class="md-title">
-        <md-button class="md-icon-button md-raised md-dense">
+        <md-button class="md-icon-button md-raised md-dense" @click="add()">
           <md-icon>add</md-icon>
         </md-button>
         {{title}}
@@ -33,8 +33,8 @@ export default {
     }
   },
   method: {
-    async itemSelect(id){
-      //add edit page of item
+    add(){
+
     }
   }
 }

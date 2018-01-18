@@ -48,25 +48,26 @@ export default {
   props: [ 'articleList' ],
   data () {
     return {
-      articleDetail: {}
+    }
+  },
+  computed: {
+    articleDetail: function(){
+      return this.$store.state.article_content;
     }
   },
   methods: {
     async preview(id){
-      let res = await this.$fetch.get('/topic/getDetail', {topicId: id});
-      if(res.status !== 200){
-        alert('Error');
-        return;
-      }
-      let json = await res.json();
-      let converter = new this.$showdown.Converter();
-      json.Content = converter.makeHtml(json.Content);
-      this.articleDetail = json;
+      await this.$api.getArticleDetail.call(this,id);
       this.$refs.dialog1.open();
     },
     closeDialog(){
       this.$refs.dialog1.close(); 
     },
+  },
+  created(){
+    if(!this.$store.state.article_content){
+      this.$store.dispatch('UpdateArticleContent', {});
+    }
   }
 }
 </script>

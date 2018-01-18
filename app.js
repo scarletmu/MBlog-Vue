@@ -6,7 +6,7 @@ const convert = require('koa-convert');
 const fs = require('fs');
 const path = require('path');
 const Koa = require('koa');
-const session = require('koa-session2').default;
+const session = require('koa-session2');
 const bodyParser = require('koa-bodyparser');
 let app = new Koa();
 
