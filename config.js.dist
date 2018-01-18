@@ -9,13 +9,12 @@ module.exports = {
     database: 0
   },
   upyun: {
-    formSecret: '',
-    bucket: '',
-    expiration: 60*10,
-    callback: {
-      host: '',
-      path: ''
-    }
+    operator: '',
+    password: '',
+    bucket: '',//same as uri
+    uri: '',
+    expiration: 60 * 10,
+    defaultSave: '/{year}/{mon}/{day}/upload_{random32}{.suffix}'
   },
   qiniu:{
     scope:'',
