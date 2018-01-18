@@ -1,7 +1,7 @@
 <template>
   <div class="TypeList">
     <md-list>
-      <md-list-item v-for="(type,index) in typeList" :key="index" @click.native="clickItem(type.Name)">
+      <md-list-item v-for="(type,index) in typeList" :key="index" @click.native="clickItem(type)">
         <md-icon>{{type.Icon}}</md-icon> <span>{{type.Name}}</span>
       </md-list-item>
     </md-list>
@@ -10,14 +10,16 @@
 
 <script>
 export default {
-  props: [ 'typeList', 'adminContentList', 'getContentList' ],
+  props: [ 'typeList', 'listClick' ],
   data () {
     return {
     }
   },
   methods: {
-    clickItem(Name){
-      this.getContentList(Name);
+    async clickItem(type){
+      if(this.listClick){
+        await this.listClick(type);
+      }
     }
   }
 }

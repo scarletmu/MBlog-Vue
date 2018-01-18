@@ -1,7 +1,7 @@
 <template>
   <div class="adminMain">
-    <TypeList :typeList="adminTypeList" :getContentList="getContentList"></TypeList>
-    <AdminList :title="title" :adminContentList="adminContentList"></AdminList>
+    <TypeList :typeList="adminTypeList" :listClick="listClick"></TypeList>
+    <AdminList :title="title" :adminContentList="adminContentList" :addContent="addContent"></AdminList>
   </div>
   
   <!--Noty-->
@@ -16,34 +16,30 @@ export default {
   data () {
     return {
       adminTypeList: [
-        {Icon: 'insert_drive_file', Name: '文章管理'},
-        {Icon: 'comment', Name: '评论管理'},
-        {Icon: 'format_line_spacing', Name: '分类管理'}
+        {Icon: 'insert_drive_file', Name: '文章管理', nickname: 'topic'},
+        {Icon: 'comment', Name: '评论管理', nickname: 'comment'},
+        {Icon: 'format_line_spacing', Name: '分类管理', nickname: 'category'}
       ],
       adminContentList: [],
       title: '后台管理'
     }
   },
   methods: {
-    async getContentList(name){
-      let url = '';
-      this.title = name;
-      switch(name){
-        case '文章管理': url = '/topic/getList';break;
-        case '评论管理': url = '/comment/getList';break;
-        case '分类管理': url = '/category/getList';break;
-      }
-      let res = await this.$fetch.get(url);
-      if(res.status !== 200){
-        console.error('getContentList Failed');
-        return;
-      }
-      let json = await res.json();
+    async listClick(type){
+      this.title = type.Name;
+      let json = await this.$api.getAdminList.call(this, type.nickname);
       this.adminContentList = json;
+    },
+    async addContent(title){
+      if(title === '文章管理'){
+        this.$router.push('/admin/add');
+      }else{
+        //show dialog
+      }
     }
   },
   mounted(){
-    this.getContentList('文章管理');
+    this.listClick(this.adminTypeList[0]);
   }
  }
 </script>
@@ -53,7 +49,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  min-width: 70%;
+  min-width: 80%;
   padding-left: 60px;
 }
 </style>

@@ -2,7 +2,7 @@
   <md-card class="adminList">
     <md-card-header>
       <div class="md-title">
-        <md-button class="md-icon-button md-raised md-dense" @click="add()">
+        <md-button class="md-icon-button md-raised md-dense" @click="addContent(title)">
           <md-icon>add</md-icon>
         </md-button>
         {{title}}
@@ -10,16 +10,22 @@
     </md-card-header>
     <md-list>
       <md-list-item v-for="(item, index) in adminContentList" :key="index">
-        <div class="md-list-text-container">
+        <div v-if="title === '文章管理'" class="md-list-text-container" v-cloak>
           <span></span>
           <span>{{item.Title}}</span>
           <p>{{item.Summary}}</p>
         </div>
-
+        <div v-if="title === '评论管理'" class="md-list-text-container" v-cloak>
+          <span></span>
+          <p>{{item.Content}}</p>
+        </div>
+        <div v-if="title === '分类管理'" class="md-list-text-container" v-cloak>
+          <span>{{item.Name}}</span>
+          <p>{{item.Describe}}</p>
+        </div>
         <md-button class="md-icon-button md-list-action">
           <md-icon class="md-primary">delete</md-icon>
         </md-button>
-
       </md-list-item>
     </md-list>
   </md-card>
@@ -27,15 +33,12 @@
 
 <script>
 export default {
-  props: [ 'title', 'adminContentList' ],
+  props: [ 'title', 'adminContentList', 'addContent' ],
   data () {
     return {
     }
   },
   method: {
-    add(){
-
-    }
   }
 }
 </script>

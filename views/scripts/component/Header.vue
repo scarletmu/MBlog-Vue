@@ -51,19 +51,7 @@ export default {
       this.$refs['adminLogin'].open();
     },
     async login(){
-      let res = await this.$fetch.post('/user/login', {
-        data: {
-          username: this.username,
-          password: this.password
-        }
-      })
-      if(res.status !== 200){
-        console.error('Log failed');
-        //Should alert here
-        let err = await res.text()
-        alert(err);
-        return;
-      }
+      await this.$api.login.call(this, this.username, this.password);
       this.$refs['adminLogin'].close();
       this.$router.push({path: '/admin'});
     } 

@@ -4,14 +4,14 @@ const router = require('koa-router')({prefix: '/admin'});
 const Topic = require('../modules/topic');
 const Category = require('../modules/category');
 
-router.use(async function (ctx, next) {
-  if (ctx.session.username) {
-    await next();
-  } else {
-    ctx.status = 403;
-    ctx.body = '无权访问';
-  }
-});
+// router.use(async function (ctx, next) {
+//   if (ctx.session.username) {
+//     await next();
+//   } else {
+//     ctx.status = 403;
+//     ctx.body = '无权访问';
+//   }
+// });
 
 router.get('/getToken', async function(ctx, next){
   try{
@@ -56,5 +56,16 @@ router.post('/addCategory',async function(ctx, next){
     ctx.body = err;
   }
 });
+
+router.post('/getToken', async function(ctx, next){
+  try {
+    let res = await Topic.getToken();
+    ctx.body = res;
+  } catch (err) {
+    console.error(err);
+    ctx.status = 500;
+    ctx.body = err;
+  }
+})
 
 module.exports = router;

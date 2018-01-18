@@ -1,9 +1,7 @@
-/**
- * Created by scarlet on 16/3/27.
- */
 'use strict';
 const Topic = require('../model/topic');
 const Promise = require('bluebird');
+const upyun = require('../utils/upyun');
 
 exports.addTopic = function(args){
   return Topic.addTopic(args);
@@ -37,5 +35,14 @@ exports.getDetail = function(TopicId){
     return detail;
   })
 };
+
+exports.getToken = function(){
+  try {
+    return upyun.getToken();
+  } catch (error) {
+    console.error(error);    
+    throw error;
+  }
+}
 
 

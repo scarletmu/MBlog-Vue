@@ -14,6 +14,13 @@ async function request(method, url, param){
 };
 
 export default {
+  async login(username, password){
+    let url = '/user/login',
+    res = await request.call(this, 'POST', url, {
+      data: { username, password }
+    });
+    return Promise.resolve();
+  },
   async getTypeList(){
     let url = '/category/getList',
     lists = await request.call(this, 'GET', url);
@@ -33,5 +40,33 @@ export default {
     res.Content = converter.makeHtml(res.Content);
     await this.$store.dispatch('UpdateArticleContent', res);
     return Promise.resolve();
+  },
+  async getAdminList(type){
+    let url = {
+      'topic': '/topic/getList',
+      'comment': '/comment/getList',
+      'category': '/category/getList'
+    };
+    if(!url[type]){ return Promise.reject({err: '无效的类型'}) };
+    let res = await request.call(this, 'GET', url[type]);
+    return Promise.resolve(res);
+  },
+  async uploadFile(file){
+    let token_url = '/admin/getToken';
+    let token_obj = await request.call(this, 'POST', token_url);
+    const data = new FormData();
+    data.append('policy', token_obj.policy);
+    data.append('authorization', token_obj.signature);
+    data.append('file', file);
+    let res = await this.$http.request({
+        url: '/scarletmu',
+        method: 'POST',
+        baseURL: 'http://v0.api.upyun.com/',
+        data: data
+    });
+    if(res.status > 400){
+      return Promise.reject(res.data);
+    }
+    return Promise.resolve(res.data);
   }
 }

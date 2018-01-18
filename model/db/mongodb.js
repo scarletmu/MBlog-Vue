@@ -29,6 +29,7 @@ const TopicSchema = new mongoose.Schema({
 const CommentSchema = new mongoose.Schema({
   authorId:{type:String},
   topicId:{type:mongoose.Schema.ObjectId},
+  replyTo: {type: mongoose.Schema.ObjectId},
   Content:{type:String},
   CreatedTime:{type:Date,default:new Date()}
 });
@@ -37,7 +38,7 @@ const CategorySchma = new mongoose.Schema({
   Name:{type:String},
   Describe:{type:String},
   Icon:{type:String,default:null},
-  Photo:{type:String,default:null}
+  nickname:{type:String,default:null}
 });
 
 const UserSchema = new mongoose.Schema({
