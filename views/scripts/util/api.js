@@ -65,7 +65,15 @@ export default {
         data: data
     });
     if(res.status > 400){
-      return Promise.reject(res.data);
+      return Promise.reject({err: res.data});
+    }
+    return Promise.resolve(res.data);
+  },
+  async saveArticle(article){
+    let url = '/admin/addTopic';
+    let res = await request.call(this, 'POST', url, article);
+    if(res.status > 400){
+      return Promise.reject({err:res.data});
     }
     return Promise.resolve(res.data);
   }

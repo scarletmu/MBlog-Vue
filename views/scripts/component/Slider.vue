@@ -2,7 +2,7 @@
  <md-sidenav class="md-left" ref="slider">
     <md-toolbar class="md-large">
       <div class="md-toolbar-container">
-        <h3 class="md-title">Sidenav content</h3>
+        <h3 class="md-title">MBlog</h3>
       </div> 
     </md-toolbar>
     <div>
