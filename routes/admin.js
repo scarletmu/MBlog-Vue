@@ -4,22 +4,12 @@ const router = require('koa-router')({prefix: '/admin'});
 const Topic = require('../modules/topic');
 const Category = require('../modules/category');
 
-// router.use(async function (ctx, next) {
-//   if (ctx.session.username) {
-//     await next();
-//   } else {
-//     ctx.status = 403;
-//     ctx.body = '无权访问';
-//   }
-// });
-
-router.get('/getToken', async function(ctx, next){
-  try{
-    let data = await upyun.getToken
-    ctx.body = data;
-  }catch(err){
-    ctx.status = 500; 
-    ctx.body = err;
+router.use(async function (ctx, next) {
+  if (ctx.session.username) {
+    await next();
+  } else {
+    ctx.status = 403;
+    ctx.body = '无权访问';
   }
 });
 
