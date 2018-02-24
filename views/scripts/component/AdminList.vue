@@ -23,7 +23,10 @@
           <span>{{item.Name}}</span>
           <p>{{item.Describe}}</p>
         </div>
-        <md-button class="md-icon-button md-list-action">
+        <md-button class="md-icon-button md-list-action" @click="editContent(title, item._id)">
+          <md-icon>edit</md-icon>
+        </md-button>
+        <md-button class="md-icon-button md-list-action" @click="deleteContent(title, item._id)">
           <md-icon class="md-primary">delete</md-icon>
         </md-button>
       </md-list-item>
@@ -33,7 +36,7 @@
 
 <script>
 export default {
-  props: [ 'title', 'adminContentList', 'addContent' ],
+  props: [ 'title', 'adminContentList', 'addContent', 'editContent', 'deleteContent' ],
   data () {
     return {
     }

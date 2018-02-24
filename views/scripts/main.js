@@ -4,17 +4,19 @@ import App from './App.vue'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
 import '../styles/loader.css'
+import 'vue-notifyjs/themes/default.css'
 //Plugin
 import VueRouter from 'vue-router';
 import showdown from 'showdown';
 import axios from 'axios';
 import api from './util/api';
 import store from './store';
+import Notify from 'vue-notifyjs'
 
-
-//Usage
+//Component
 Vue.use(VueRouter);
 Vue.use(VueMaterial);
+Vue.use(Notify, {timeout: 1000});
 //mixin
 Vue.prototype.$showdown = showdown;
 Vue.prototype.$http = axios;
@@ -31,7 +33,8 @@ const router = new VueRouter({
   routes: [
     { path: '/', component: Main },
     { path: '/admin', component: AdminMain },
-    { path: '/admin/add', component: AdminAdd}
+    { path: '/admin/add', component: AdminAdd },
+    { path: '/admin/edit/:id', component: AdminAdd }
   ]
 })
 

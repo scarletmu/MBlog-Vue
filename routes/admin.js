@@ -35,7 +35,6 @@ router.post('/addTopic', async function(ctx, next){
 });
 
 router.post('/editTopic', async function(ctx, next){
-  let data = req.body;
   try{
     let body = ctx.request.body;
     let result = await Topic.editTopic(body.id, body.args);

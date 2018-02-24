@@ -29,6 +29,7 @@
     "showdown": "^1.6.4",
     "vue": "^2.5.13",
     "vue-material": "^0.8.1",
+    "vue-notifyjs": "^0.4.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },

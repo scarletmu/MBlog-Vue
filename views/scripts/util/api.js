@@ -41,6 +41,11 @@ export default {
     await this.$store.dispatch('UpdateArticleContent', res);
     return Promise.resolve();
   },
+  async getRawArticle(id){
+    let url = `/topic/getDetail?topicId=${id}`,
+    res = await request.call(this, 'GET', url);
+    return Promise.resolve(res);
+  },
   async getAdminList(type){
     let url = {
       'topic': '/topic/getList',
@@ -69,6 +74,14 @@ export default {
     }
     return Promise.resolve(res.data);
   },
+  async editArticle(id, article){
+    let url = '/admin/editTopic';
+    let res = await request.call(this, 'POST', url, {id, args: article});
+    if(res.status > 400){
+      return Promise.reject({err:res.data});
+    }
+    return Promise.resolve(res.data);
+  },
   async saveArticle(article){
     let url = '/admin/addTopic';
     let res = await request.call(this, 'POST', url, article);
@@ -76,5 +89,8 @@ export default {
       return Promise.reject({err:res.data});
     }
     return Promise.resolve(res.data);
+  },
+  async deleteArticle(article){
+    let url = '/admin/deleteTopic';
   }
 }

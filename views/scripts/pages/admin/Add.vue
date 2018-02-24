@@ -45,7 +45,7 @@
         </md-card-media-cover>
       </md-card>
     </div>
-    <md-button @click="submit" class="md-primary">保存</md-button>
+    <md-button @click="submit" class="md-primary" :disabled="isSubmit">保存</md-button>
     <md-dialog ref="dialog1">
       <md-dialog-title>图片地址</md-dialog-title>
       <md-dialog-content>
@@ -68,7 +68,9 @@ export default {
       category: null,
       summary: null,
       simplemde: null,
-      typeList: []
+      isSubmit: false,
+      typeList: [],
+      isEdit: false
     }
   },
   methods:{
@@ -90,7 +92,8 @@ export default {
       let res = await this.$api.getAdminList.call(this,'category');
       this.typeList = res;
     },
-    async submit(){
+    submit(){
+      this.isSubmit = true;
       let article = {
         Title: this.title,
         Summary: this.summary,
@@ -98,16 +101,65 @@ export default {
         Thumbnail: this.thumbnail,
         Category: this.category 
       }; 
-      console.log(article);
+      if(this.isEdit){
+        this.edit(article);
+      }else{
+        this.add(article);
+      }
+    },
+    async add(article){
+      try {
+        let res = await this.$api.saveArticle.call(this, article), _this = this;
+        this.$notify({
+          message: '添加文章成功',
+          type: 'success'
+        })
+        setTimeout(function(){
+          _this.$route.replace('/admin');
+        }, 1000);
+      } catch (error) {
+        this.$notify({
+          message: '添加文章出错',
+          type: 'error'
+        })
+        this.isSubmit = false;
+      }
+    },
+    async edit(article){
+      try {
+        let res = await this.$api.editArticle.call(this, this.$route.params.id, article), _this = this;
+        this.$notify({
+          message: '编辑文章成功',
+          type: 'success'
+        })
+        setTimeout(function(){
+          _this.$router.replace('/admin');
+        }, 1000); 
+      } catch (error) {
+       this.$notify({
+          message: '编辑文章出错',
+          type: 'error'
+        })
+        this.isSubmit = false; 
+      }
     }
   },
-  mounted(){
+  async mounted(){
     let simplemde = new SimpleMDE({ 
       element: document.getElementById("editArea"),
-      spellChecker: false 
+      spellChecker: false
     });
-    this.getCategory();
     this.editor = simplemde;
+    this.getCategory();
+    if(this.$route.params.id){
+      let article = await this.$api.getRawArticle.call(this, this.$route.params.id);
+      this.title = article.Title;
+      this.summary = article.Summary;
+      this.thumbnail = article.Thumbnail;
+      this.category = article.Category;
+      this.editor.value(article.Content);
+      this.isEdit = true;
+    }
   }
 }
 </script>

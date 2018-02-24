@@ -5,6 +5,7 @@
     <div id="body">
       <router-view class="viewArea"></router-view>
     </div>
+    <notifications></notifications>
   </div>
 </template>
 

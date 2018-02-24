@@ -8,10 +8,7 @@
     <div>
       <md-list>
         <md-list-item>
-          <md-icon>move_to_inbox</md-icon> <span>Inbox</span>
-        </md-list-item>
-        <md-list-item>
-          <md-icon>send</md-icon> <span>Sent Mail</span>
+          <md-icon>send</md-icon> <span>shuimu123@gmail.com</span>
         </md-list-item>
         <md-list-item>
           <md-icon>delete</md-icon> <span>Trash</span>

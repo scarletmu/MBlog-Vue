@@ -1,7 +1,12 @@
 <template>
   <div class="adminMain">
     <TypeList :typeList="adminTypeList" :listClick="listClick"></TypeList>
-    <AdminList :title="title" :adminContentList="adminContentList" :addContent="addContent"></AdminList>
+    <AdminList :title="title" 
+      :adminContentList="adminContentList" 
+      :addContent="addContent" 
+      :editContent="editContent" 
+      :deleteContent="deleteContent"
+    ></AdminList>
   </div>
   
   <!--Noty-->
@@ -30,12 +35,22 @@ export default {
       let json = await this.$api.getAdminList.call(this, type.nickname);
       this.adminContentList = json;
     },
-    async addContent(title){
+    addContent(title){
       if(title === '文章管理'){
         this.$router.push('/admin/add');
       }else{
         //show dialog
       }
+    },
+    editContent(title, id){
+      if(title === '文章管理'){
+        this.$router.push(`/admin/edit/${id}`)
+      }else{
+
+      }
+    },
+    deleteContent(title, id){
+
     }
   },
   mounted(){
