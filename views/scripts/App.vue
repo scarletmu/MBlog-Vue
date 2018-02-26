@@ -3,7 +3,9 @@
     <HeadBar :toggleSlider="toggleSlider"></HeadBar>
     <Slider></Slider>
     <div id="body">
-      <router-view class="viewArea"></router-view>
+      <transition name="fade">
+        <router-view class="viewArea"></router-view>
+      </transition>
     </div>
     <notifications></notifications>
   </div>

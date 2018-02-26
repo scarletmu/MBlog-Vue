@@ -2,12 +2,13 @@
   <md-card class="adminList">
     <md-card-header>
       <div class="md-title">
-        <md-button class="md-icon-button md-raised md-dense" @click="addContent(title)">
+        <md-button v-if="title !== '评论管理'" class="md-icon-button md-raised md-dense" @click="addContent(title)">
           <md-icon>add</md-icon>
         </md-button>
         {{title}}
       </div>
     </md-card-header>
+    <transition name="fade">
     <md-list>
       <md-list-item v-for="(item, index) in adminContentList" :key="index">
         <div v-if="title === '文章管理'" class="md-list-text-container" v-cloak>
@@ -31,6 +32,7 @@
         </md-button>
       </md-list-item>
     </md-list>
+    </transition>
   </md-card>
 </template>
 

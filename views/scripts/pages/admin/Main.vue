@@ -7,6 +7,7 @@
       :editContent="editContent" 
       :deleteContent="deleteContent"
     ></AdminList>
+   <EditDialog ref="childDialog" :title="title" :content="dialog_input"></EditDialog> 
   </div>
   
   <!--Noty-->
@@ -15,9 +16,10 @@
 <script>
 import TypeList from '../../component/TypeList.vue'
 import AdminList from '../../component/AdminList.vue'
+import EditDialog from '../../component/EditDialog.vue'
 
 export default {
-  components: { TypeList, AdminList }, 
+  components: { TypeList, AdminList, EditDialog }, 
   data () {
     return {
       adminTypeList: [
@@ -26,7 +28,8 @@ export default {
         {Icon: 'format_line_spacing', Name: '分类管理', nickname: 'category'}
       ],
       adminContentList: [],
-      title: '后台管理'
+      title: '后台管理',
+      dialog_input: {Name: null, Icon: null, Describe: null}
     }
   },
   methods: {
@@ -35,18 +38,22 @@ export default {
       let json = await this.$api.getAdminList.call(this, type.nickname);
       this.adminContentList = json;
     },
+    closeDialog() {
+      this.$refs['edit_dialog'].close();
+    },
     addContent(title){
       if(title === '文章管理'){
         this.$router.push('/admin/add');
-      }else{
+      }else if(title === '分类管理'){
         //show dialog
+        this.$refs.childDialog.open();
       }
     },
     editContent(title, id){
       if(title === '文章管理'){
         this.$router.push(`/admin/edit/${id}`)
-      }else{
-
+      }else if(title === '分类管理'){
+        this.$refs.EditDialog.open();
       }
     },
     deleteContent(title, id){

@@ -21,6 +21,15 @@ export default {
     });
     return Promise.resolve();
   },
+  async checkLogin(){
+    let url = '/user/checkLogin';
+    try {
+      let res = await request.call(this, 'GET', url);
+      return Promise.resolve(true);
+    } catch (error) {
+      return Promise.resolve(false); 
+    }
+  },
   async getTypeList(){
     let url = '/category/getList',
     lists = await request.call(this, 'GET', url);
@@ -69,17 +78,11 @@ export default {
         baseURL: 'http://v0.api.upyun.com/',
         data: data
     });
-    if(res.status > 400){
-      return Promise.reject({err: res.data});
-    }
     return Promise.resolve(res.data);
   },
   async editArticle(id, article){
     let url = '/admin/editTopic';
     let res = await request.call(this, 'POST', url, {id, args: article});
-    if(res.status > 400){
-      return Promise.reject({err:res.data});
-    }
     return Promise.resolve(res.data);
   },
   async saveArticle(article){
@@ -92,5 +95,13 @@ export default {
   },
   async deleteArticle(article){
     let url = '/admin/deleteTopic';
+  },
+  async saveCategory(category){
+    let url = '/admin/addCategory';
+    let res = await request.call(this, 'POST', url, category);
+  },
+  async editCategory(id, category){
+    let url = '/admin/editCategory'
+    let res = await request.call(this, 'POST', url, {id, args: category});
   }
 }

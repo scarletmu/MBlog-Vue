@@ -4,7 +4,7 @@
       <md-icon>menu</md-icon>
     </md-button>
 
-    <h2 class="md-title" style="flex: 1">MBlog</h2>
+    <h2 class="md-title" style="flex: 1" @click="home">MBlog</h2>
 
     <md-button class="md-icon-button">
       <md-icon @click.native="loginDialog">settings</md-icon>
@@ -47,8 +47,16 @@ export default {
     toggle(){
       this.toggleSlider();
     },
-    loginDialog(){
-      this.$refs['adminLogin'].open();
+    home(){
+      this.$router.push('/');
+    },
+    async loginDialog(){
+      let res = await this.$api.checkLogin.call(this);
+      if(!res) {
+        this.$refs['adminLogin'].open();
+      }else{
+        this.$router.push('/admin');
+      }
     },
     async login(){
       await this.$api.login.call(this, this.username, this.password);

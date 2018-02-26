@@ -22,6 +22,10 @@
         <label>简介</label>
         <md-input v-model="summary"></md-input>
       </md-input-container>
+       <md-input-container>
+        <label>缩略图地址</label>
+        <md-input v-model="thumbnail"></md-input>
+      </md-input-container>
     </div>
     <textarea id="editArea"></textarea>
     <div class="uploadArea">
