@@ -36,7 +36,7 @@
       <md-dialog-title>{{articleDetail.Title}}</md-dialog-title>
       <md-dialog-content v-html="articleDetail.Content"></md-dialog-content>
       <md-dialog-actions>
-        <md-button class="md-primary md-raised" @click="closeDialog()">查看详情</md-button>
+        <md-button class="md-primary md-raised" @click="detail(articleDetail._id)">查看详情</md-button>
         <md-button class="md-raised" @click="closeDialog()">关闭</md-button>
       </md-dialog-actions>
     </md-dialog>
@@ -63,6 +63,9 @@ export default {
     closeDialog(){
       this.$refs.dialog1.close(); 
     },
+    detail(id){
+      this.$router.push(`/detail/${id}`)
+    }
   },
   created(){
     if(!this.$store.state.article_content){

@@ -49,7 +49,7 @@ router.post('/addCategory',async function(ctx, next){
 router.post('/editCategory',async function(ctx, next){
   try{
     let { id, args } = ctx.request.body;
-    let result = await Category.addCategory(body);
+    let result = await Category.editCategory(id, args);
     ctx.body = result;
   }catch(err){
     ctx.status = 500;

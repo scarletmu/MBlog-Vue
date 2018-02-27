@@ -4,7 +4,7 @@ import App from './App.vue'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
 import '../styles/loader.css'
-import 'vue-notifyjs/themes/default.css'
+import 'vue-notifyjs/themes/material.css'
 //Plugin
 import VueRouter from 'vue-router';
 import showdown from 'showdown';
@@ -16,7 +16,7 @@ import Notify from 'vue-notifyjs'
 //Component
 Vue.use(VueRouter);
 Vue.use(VueMaterial);
-Vue.use(Notify, {timeout: 1000});
+Vue.use(Notify, {timeout: 1500});
 //mixin
 Vue.prototype.$showdown = showdown;
 Vue.prototype.$http = axios;
@@ -24,6 +24,7 @@ Vue.prototype.$api = api;
 
 //Page
 import Main from './pages/Main.vue'
+import Detail from './pages/Detail.vue'
 
 import AdminAdd from './pages/admin/Add.vue'
 import AdminMain from './pages/admin/Main.vue'
@@ -34,7 +35,8 @@ const router = new VueRouter({
     { path: '/', component: Main },
     { path: '/admin', component: AdminMain },
     { path: '/admin/add', component: AdminAdd },
-    { path: '/admin/edit/:id', component: AdminAdd }
+    { path: '/admin/edit/:id', component: AdminAdd },
+    { path: '/detail/:id', component: Detail }
   ]
 })
 

@@ -24,10 +24,10 @@
           <span>{{item.Name}}</span>
           <p>{{item.Describe}}</p>
         </div>
-        <md-button class="md-icon-button md-list-action" @click="editContent(title, item._id)">
+        <md-button class="md-icon-button md-list-action" @click="editContent(title, item)">
           <md-icon>edit</md-icon>
         </md-button>
-        <md-button class="md-icon-button md-list-action" @click="deleteContent(title, item._id)">
+        <md-button class="md-icon-button md-list-action" @click="deleteContent(title, item)">
           <md-icon class="md-primary">delete</md-icon>
         </md-button>
       </md-list-item>

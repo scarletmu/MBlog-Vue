@@ -7,12 +7,13 @@ const fs = require('fs');
 const path = require('path');
 const Koa = require('koa');
 const session = require('koa-session2');
+const Store = require('./model/db/redisStore');
 const bodyParser = require('koa-bodyparser');
-let app = new Koa();
+const app = new Koa();
 
 app.use(session({
-  key: 'koa:sess'
-}, app))
+  store: new Store() 
+}))
 app.use(convert(logger()));
 app.use(bodyParser());
 

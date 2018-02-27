@@ -7,7 +7,7 @@
       :editContent="editContent" 
       :deleteContent="deleteContent"
     ></AdminList>
-   <EditDialog ref="childDialog" :title="title" :content="dialog_input"></EditDialog> 
+   <EditDialog ref="childDialog" @refresh="refresh" :title="title" :content="dialog_input"></EditDialog> 
   </div>
   
   <!--Noty-->
@@ -29,13 +29,19 @@ export default {
       ],
       adminContentList: [],
       title: '后台管理',
+      type: null,
       dialog_input: {Name: null, Icon: null, Describe: null}
     }
   },
   methods: {
     async listClick(type){
       this.title = type.Name;
-      let json = await this.$api.getAdminList.call(this, type.nickname);
+      this.type = type.nickname;
+      let json = await this.$api.getAdminList.call(this, this.type);
+      this.adminContentList = json;
+    },
+    async refresh(){
+      let json = await this.$api.getAdminList.call(this, this.type);
       this.adminContentList = json;
     },
     closeDialog() {
@@ -49,11 +55,12 @@ export default {
         this.$refs.childDialog.open();
       }
     },
-    editContent(title, id){
+    editContent(title, item){
       if(title === '文章管理'){
-        this.$router.push(`/admin/edit/${id}`)
+        this.$router.push(`/admin/edit/${item._id}`)
       }else if(title === '分类管理'){
-        this.$refs.EditDialog.open();
+        this.dialog_input = Object.assign({}, item);
+        this.$refs.childDialog.open();
       }
     },
     deleteContent(title, id){

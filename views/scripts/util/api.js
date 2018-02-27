@@ -1,16 +1,29 @@
 async function request(method, url, param){
   let res = null;
-  if(!method || method === 'GET'){
-    res = await this.$http.get(url);
-  }else if(method === 'POST'){
-    res = await this.$http.post(url, param);
-  }else{
-    return Promise.reject({err: '无效的方法'});
-  }
-  if(res.status >= 400){
+  try {
+    if(!method || method === 'GET'){
+      res = await this.$http.get(url);
+    }else if(method === 'POST'){
+      res = await this.$http.post(url, param);
+    }else{
+      return Promise.reject({err: '无效的方法'});
+    } 
+    return Promise.resolve(res.data);
+  } catch (error) {
+    if(error.stack.indexOf('403') > -1){
+      this.$notify({
+        message: '请先登录',
+        type: 'warning'
+      });
+      this.$router.replace('/');
+      return Promise.reject({err: res.data});
+    }
+    this.$notify({
+      message: '请求服务器发生错误',
+      type: 'danger'
+    })
     return Promise.reject({err: res.data});
-  }
-  return Promise.resolve(res.data);
+  } 
 };
 
 export default {
@@ -96,12 +109,14 @@ export default {
   async deleteArticle(article){
     let url = '/admin/deleteTopic';
   },
-  async saveCategory(category){
+  async addCategory(category){
     let url = '/admin/addCategory';
     let res = await request.call(this, 'POST', url, category);
+    return Promise.resolve();
   },
   async editCategory(id, category){
-    let url = '/admin/editCategory'
+    let url = '/admin/editCategory';
     let res = await request.call(this, 'POST', url, {id, args: category});
+    return Promise.resolve();
   }
 }

@@ -25,9 +25,10 @@
 
 <script>
 export default {
-  props: [ 'title', 'content'],
+  props: [ 'title', 'content' ],
   data(){
     return {
+      isEdit: false
     }
   },
   methods: {
@@ -38,9 +39,35 @@ export default {
       this.$refs['edit_dialog'].close();
     },
     async submit(){
-      this.$api.
+      try {
+        this.content._id? this.isEdit=true : this.isEdit=false;
+        if(this.isEdit){
+          let args = {
+            Name: this.content.Name,
+            Icon: this.content.Icon,
+            Describe: this.content.Describe
+          }
+          await this.$api.editCategory.call(this, this.content._id, args);
+        }else{
+          await this.$api.addCategory.call(this, this.content);
+        } 
+        this.$notify({
+          message: '添加/编辑分类成功',
+          type: 'success'
+        });
+        this.$emit('refresh');
+        this.close();
+        this.isEdit = false;
+      } catch (error) {
+        this.$notify({
+          message: '添加/编辑分类时发生错误',
+          type: 'danger'
+        });
+      }
     }
-  }  
+  },
+  mounted(){
+  }
 }
 </script>
 

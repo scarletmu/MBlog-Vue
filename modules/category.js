@@ -8,3 +8,7 @@ exports.getList = function(){
 exports.addCategory = function(args){
   return Category.add(args);
 };
+
+exports.editCategory = function(id, args){
+  return Category.update(id, args);
+}
