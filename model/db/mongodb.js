@@ -38,6 +38,7 @@ const CategorySchma = new mongoose.Schema({
   Name:{type:String},
   Describe:{type:String},
   Icon:{type:String,default:null},
+  defaultThumb:{type:String, default: Config.defaultThumb},
   nickname:{type:String,default:null}
 });
 

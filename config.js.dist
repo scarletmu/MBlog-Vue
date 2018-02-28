@@ -23,5 +23,6 @@ module.exports = {
   defaultAdmin: {
     username: 'admin',
     password: 'admin'
-  }
+  },
+  defaultThumb: ''
 };

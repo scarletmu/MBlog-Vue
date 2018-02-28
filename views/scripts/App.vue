@@ -43,5 +43,6 @@ export default {
 }
 .viewArea {
   margin-top:5px;
+  min-width: 80%;
 }
 </style>

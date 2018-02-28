@@ -9,7 +9,6 @@
     </md-card>
     <div class="commentArea">
     </div>
-    
   </div> 
 </template>
 
@@ -42,7 +41,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   overflow: hidden;
 }
 .contentArea{

@@ -30,7 +30,7 @@ export default {
       adminContentList: [],
       title: '后台管理',
       type: null,
-      dialog_input: {Name: null, Icon: null, Describe: null}
+      dialog_input: {Name: null, Icon: null, Describe: null, defaultThumb: null}
     }
   },
   methods: {
@@ -67,7 +67,8 @@ export default {
 
     }
   },
-  mounted(){
+  async mounted(){
+    await this.$api.checkLogin.call(this);
     this.listClick(this.adminTypeList[0]);
   }
  }

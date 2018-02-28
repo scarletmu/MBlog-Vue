@@ -49,7 +49,7 @@ export default {
     await this.$store.dispatch('UpdateTypes', lists);
     return Promise.resolve();
   },  
-  async getArticleList(page){
+  async getArticleList(page = 1){
     let url = `/topic/getList?page=${page}`,
     lists = await request.call(this, 'GET', url);
     await this.$store.dispatch('UpdateArticles', lists);

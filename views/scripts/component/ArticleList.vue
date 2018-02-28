@@ -78,10 +78,10 @@ export default {
 <style>
 .titleImg {
   max-width:100%;
-  max-height:100%;
+  max-height:200px;
 }
 .articleCard {
-  max-width: 480px;
+  width: 300px;
   margin: 8px 16px;
 }
 
@@ -89,17 +89,15 @@ export default {
   display: flex;
   flex-wrap:wrap;
   justify-content: center;
-  align-items: center;
-  max-width: 80%;
 }
 @media (min-width: 480px) and (max-width: 960px){
   .articleCard {
-    max-width: 240px; 
+    width: 240px; 
   }
 }
 @media (max-width: 480px) {
   .articleCard {
-    max-width: 320px;
+    width: 320px;
   }
 }
 </style>

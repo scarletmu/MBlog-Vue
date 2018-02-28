@@ -119,7 +119,7 @@ export default {
           type: 'success'
         })
         setTimeout(function(){
-          _this.$route.replace('/admin');
+          _this.$router.replace('/admin');
         }, 1000);
       } catch (error) {
         this.$notify({

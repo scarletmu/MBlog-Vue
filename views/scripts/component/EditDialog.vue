@@ -14,6 +14,10 @@
           <label>描述</label>
           <md-input v-model="content.Describe"></md-input>
         </md-input-container>
+        <md-input-container>
+          <label>默认缩略图地址</label>
+          <md-input v-model="content.defaultThumb"></md-input>
+        </md-input-container>
       </md-dialog-content>
 
       <md-dialog-actions>
@@ -45,7 +49,8 @@ export default {
           let args = {
             Name: this.content.Name,
             Icon: this.content.Icon,
-            Describe: this.content.Describe
+            Describe: this.content.Describe.Describe,
+            defaultThumb: this.content.defaultThumb
           }
           await this.$api.editCategory.call(this, this.content._id, args);
         }else{
