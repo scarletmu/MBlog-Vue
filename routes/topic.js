@@ -2,52 +2,45 @@
 const router = require('koa-router')({prefix: '/topic'});
 const logger = require('../utils/logger');
 const Topic = require('../modules/topic');
+const respBuild = require('../utils/respBuild');
 
 router.get('/getList', async function(ctx, next){
   try{
     let result = await Topic.getList(ctx.query['page']);
-    ctx.body = result;
+    respBuild.buildSuccess(ctx, result);
   }catch(err){
-    logger.error('Error in getList');
-    logger.error(err);
-    ctx.status = 500;
-    ctx.body = err;
+    logger.error('topic', 'getList', err);
+    respBuild.buildError(ctx, err);
   }
 });
 
 router.get('/getTop', async function(ctx, next){
   try{
     let data = await Topic.getTop();
-    ctx.body = data;
+    respBuild.buildSuccess(ctx, data);
   }catch(err){
-    logger.error('Error in getTop');
-    logger.error(err);
-    ctx.status = 500;
-    ctx.body = err;
+    logger.error('topic', 'getTop', err);
+    respBuild.buildError(ctx, err);
   }
 });
 
 router.get('/getDetail',async function(ctx, next){
   try{
     let data = await Topic.getDetail(ctx.query['topicId']);
-    ctx.body = data;
+    respBuild.buildSuccess(ctx, data);
   }catch(err){
-    logger.error('Error in getDetail');
-    logger.error(err);
-    ctx.status = 500;
-    ctx.body = err;
+    logger.error('topic', 'getList', err);
+    respBuild.buildError(ctx, err);
   }
 });
 
 router.get('/getListByCategory', async function(ctx,next){
   try{
     let data = await Topic.getListByCategory(ctx.query['id'], ctx.query['page']);
-    ctx.body = data;
+    respBuild.buildSuccess(ctx, data);
   }catch(err){
-    logger.error('Error in getDetail');
-    logger.error(err);
-    ctx.status = 500;
-    ctx.body = err;
+    logger.error('topic', 'getListByCategory', err);
+    respBuild.buildError(ctx, err);
   }
 });
 

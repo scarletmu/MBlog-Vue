@@ -8,6 +8,7 @@
       <md-card-content v-html="article.Content"> </md-card-content>
     </md-card>
     <div class="commentArea">
+      <div id="uyan_frame"></div>
     </div>
   </div> 
 </template>

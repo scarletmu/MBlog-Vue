@@ -24,4 +24,10 @@ exports.getDetail = function(TopicId){
   return Topic.findById(TopicId).exec();
 };
 
+exports.delete = function* (id){
+  return Topic.deleteOne({_id: id});
+};
+
+exports.model = Topic;
+
 

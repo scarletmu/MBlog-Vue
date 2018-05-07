@@ -24,5 +24,9 @@ module.exports = {
     username: 'admin',
     password: 'admin'
   },
-  defaultThumb: ''
+  defaultThumb: '',
+  Title: 'MBlog',
+  Slider: [
+    //{icon: '', text: ''}
+  ]
 };

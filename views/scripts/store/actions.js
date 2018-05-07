@@ -15,3 +15,7 @@ export const UpdateTypes = ({ commit }, lists) => {
 export const UpdateArticleContent = ({ commit }, article) => {
   commit(types.UPDATE_ARTICLE_CONTENT, { article });
 }
+
+export const UpdateSlider = ({ commit }, slider) => {
+  commit(types.UPDATE_SLIDER, { slider });
+}

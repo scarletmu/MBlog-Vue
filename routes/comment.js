@@ -1,6 +1,7 @@
 'use strict';
 const Comment = require('../modules/comment');
 const router = require('koa-router')({prefix: '/comment'});
+const respBuild = require('../utils/respBuild');
 
 router.post('/addComment', async function(ctx, next){
   try{

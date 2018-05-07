@@ -7,15 +7,8 @@
     </md-toolbar>
     <div>
       <md-list>
-        <md-list-item>
-          <md-icon>send</md-icon> <span>shuimu123@gmail.com</span>
-        </md-list-item>
-        <md-list-item>
-          <md-icon>delete</md-icon> <span>Trash</span>
-        </md-list-item>
-        <md-list-item>
-          <md-icon>error</md-icon> <span>Spam</span>
-          <md-divider class="md-inset"></md-divider>
+        <md-list-item v-for="(item, index) of slider_data" :key="index">
+          <md-icon>{{item.icon}}</md-icon> <span>{{item.text}}</span>
         </md-list-item>
       </md-list>
     </div>       
@@ -24,9 +17,15 @@
 
 <script>
 export default {
-  data () {
-    return {
+  computed:{
+    slider_data: function(){
+      return this.$store.state.slider || [];
     }
+  },
+  async mounted(){
+    if(!this.$store.state.slider){
+      await this.$api.initSlider.call(this);
+    };
   }
 }
 </script>

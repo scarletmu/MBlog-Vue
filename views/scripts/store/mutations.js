@@ -13,5 +13,8 @@ export default {
   },
   [types.UPDATE_ARTICLE_CONTENT] (state, { article }){
     Vue.set(state, 'article_content', article);
+  },
+  [types.UPDATE_SLIDER] (state, { slider }){
+    Vue.set(state, 'slider', slider);
   }
 }

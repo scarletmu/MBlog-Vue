@@ -16,3 +16,5 @@ exports.getList = function(){
 exports.getSingle = function(id){
   return Category.find({_id:id}).exec();
 };
+
+exports.model = Category;

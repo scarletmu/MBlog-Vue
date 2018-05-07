@@ -8,34 +8,44 @@ async function request(method, url, param){
     }else{
       return Promise.reject({err: '无效的方法'});
     } 
-    return Promise.resolve(res.data);
+    return Promise.resolve(res.data.data);
   } catch (error) {
-    if(error.stack.indexOf('403') > -1){
+    let { data, status } = error.response;
+    if(status === 403){
       this.$notify({
         message: '请先登录',
         type: 'warning'
       });
       this.$router.replace('/');
-      return Promise.reject({err: res.data});
+      return Promise.reject();
+    };
+    if(status === 400){
+      this.$notify({
+        message: '操作失败',
+        type: 'warning'
+      });
+      return Promise.reject(data);
+    };
+    if(status === 500){
+     this.$notify({
+        message: '请求服务器发生错误',
+        type: 'danger'
+      })
+      return Promise.reject(data); 
     }
-    this.$notify({
-      message: '请求服务器发生错误',
-      type: 'danger'
-    })
-    return Promise.reject({err: res.data});
   } 
 };
 
 export default {
   async login(username, password){
-    let url = '/user/login',
+    let url = '/admin/login',
     res = await request.call(this, 'POST', url, {
       data: { username, password }
     });
     return Promise.resolve();
   },
   async checkLogin(){
-    let url = '/user/checkLogin';
+    let url = '/admin/checkLogin';
     try {
       let res = await request.call(this, 'GET', url);
       return Promise.resolve(true);
@@ -96,15 +106,12 @@ export default {
   async editArticle(id, article){
     let url = '/admin/editTopic';
     let res = await request.call(this, 'POST', url, {id, args: article});
-    return Promise.resolve(res.data);
+    return Promise.resolve(res);
   },
   async saveArticle(article){
     let url = '/admin/addTopic';
     let res = await request.call(this, 'POST', url, article);
-    if(res.status > 400){
-      return Promise.reject({err:res.data});
-    }
-    return Promise.resolve(res.data);
+    return Promise.resolve(res);
   },
   async deleteArticle(article){
     let url = '/admin/deleteTopic';
@@ -117,6 +124,12 @@ export default {
   async editCategory(id, category){
     let url = '/admin/editCategory';
     let res = await request.call(this, 'POST', url, {id, args: category});
+    return Promise.resolve();
+  },
+  async initSlider(){
+    let url = '/info/initSlider';
+    let res = await request.call(this, 'GET', url);
+    await this.$store.dispatch('UpdateSlider', res);
     return Promise.resolve();
   }
 }

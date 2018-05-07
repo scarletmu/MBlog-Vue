@@ -20,3 +20,5 @@ exports.getList = function(page){
 exports.getListByTopic = function(id){
   return Comment.find({topicId:id}).exec();
 };
+
+exports.model = Comment;

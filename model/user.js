@@ -12,3 +12,5 @@ exports.find = function(){
 exports.create = function(obj){
   return User.create(obj);
 };
+
+exports.model = User;

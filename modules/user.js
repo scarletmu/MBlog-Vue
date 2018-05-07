@@ -2,8 +2,6 @@
 const User = require('../model/user');
 const Config = require('../config');
 const crypto = require('crypto');
-const Promise = require('bluebird');
-const co = require('co');
 
 exports.login = function(username,password){
   return User.findById(username).then((userInfo) => {
@@ -13,32 +11,32 @@ exports.login = function(username,password){
         delete userInfo.password;
         return userInfo;
       }else{
-        return Promise.reject('Wrong Password');
+        return Promise.reject({
+          errMsg: '密码错误',
+          errCode: 'PASSWORDERR'
+        });
       }
     }else{
-      return Promise.reject('No Such User');
+      return Promise.reject({
+        errMsg: '不存在用户',
+        errCode: 'USERNOTEXIST'
+      });
     }
   });
 };
 
-exports.init = function(){
-  co(function* (){
-    let list = yield User.find();
+exports.init = async function(){
+    let list = await User.find();
     if(list.length > 0){
       console.log('Aready have user');
       return;
     }
     let pwd = Config.defaultAdmin.password || 'admin', md5Pwd = md5(pwd);
-    yield User.create({
+    await User.create({
       username: Config.defaultAdmin.username || 'admin',
       password: md5Pwd  
     });
     console.log('Create default admin success');
-  }) 
-  .catch((err) => {
-    console.log('Error in init user');
-    console.log(err);
-  })
 }
 
 function md5(str) {

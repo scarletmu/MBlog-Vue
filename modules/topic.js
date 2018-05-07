@@ -1,9 +1,9 @@
 'use strict';
 const Topic = require('../model/topic');
 const Category = require('../model/category');
-const Promise = require('bluebird');
 const upyun = require('../utils/upyun');
 const Config = require('../config');
+const logger = require('../utils/logger');
 
 exports.addTopic = async function(args){
   if(!args.Thumbnail){
@@ -38,16 +38,30 @@ exports.getList = async function (page){
   limit = {skip:(page-1) * rest,limit: rest,sort:{CreatedTime:-1}},
   normal = await Topic.getList({Top: false}, limit),
   result = top.concat(normal);
+  logger.error('test');
   return Promise.resolve(result);
 };
 
-exports.getDetail = function(TopicId){
-  return Promise.all([
-    Topic.getDetail(TopicId),
-    Topic.addNum(TopicId,{ViewNum:1})
-  ]).spread((detail,addResult) => {
-    return detail;
-  })
+exports.getDetail = async function(TopicId){
+  try {
+    let res = await Promise.all([
+      Topic.getDetail(TopicId),
+      Topic.addNum(TopicId,{ViewNum:1})
+    ]);
+    return res[0];
+  } catch (error) {
+    console.error(error); 
+    return error;
+  }
+};
+
+exports.deleteTopic = async function(id){
+  try {
+    let res = await Topic.delete(id); 
+  } catch (error) {
+    console.error(error); 
+    return ;
+  }
 };
 
 exports.getToken = function(){
